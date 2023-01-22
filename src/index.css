@@ -1,13 +1,69 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+div::-webkit-scrollbar{
+    width: 5px;
+}
+
+div::-webkit-scrollbar-thumb{
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+div::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+
+.container{
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+#blog{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#blog > h1,#blog > h2{
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    margin-bottom: 0.875rem;
+    color: #000000;
+}
+
+#blog > h1{
+    font-size: 2.5rem;
+}
+
+#blog > h2{
+    font-family: 'Manrope';
+    /* font-weight: bolder; */
+    font-size: 1.5rem;
+}
+
+#blog p{
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.875rem;
+    margin-bottom: 0.875em;
+}
+
+.Dropdown-arrow{
+    width: auto;
+}
+
+input[type=time]::selection {
+    background-color: green; 
 }
