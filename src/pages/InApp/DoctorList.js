@@ -1,4 +1,4 @@
-import React,{useCallback, useEffect} from 'react'
+import React,{useCallback, useState,useEffect} from 'react'
 import { Link,useParams } from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import { getDoctors } from '../../redux/actions/docActions';
@@ -23,7 +23,15 @@ function DoctorList() {
     console.log('Docs: ',doctor?.doctors);
 
   return (
-    <div className='pt-4 text-black'>
+    <div className='pt-4 text-black flex flex-row font-manrope gap-4'>
+        {/* <div className='p-4 rounded-lg shadow-md flex flex-col w-min h-min gap-2'>
+            <h3>Filter By</h3>
+            <div className='flex flex-col gap-2'>
+                <input className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2'  type={'text'} placeholder='Enter city' onChange={(e)=>setCity(e.target.value)}/>
+                <input className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2' type={'text'} placeholder='Enter state' onChange={(e)=>setState(e.target.value)}/>
+                <input className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2' type={'text'} placeholder='Enter country' onChange={(e)=>setCountry(e.target.value)}/>
+            </div>
+        </div> */}
         {doctor?.loading && <p>Loading...</p>}
         {!doctor?.loading && <div className='flex flex-wrap flex-col md:flex-row gap-2 items-stretch justify-center pb-8 gap-4 m-auto md:gap-8'>
             {doctor?.doctors?.map(doc => <DoctorCard doc={doc}/>)}

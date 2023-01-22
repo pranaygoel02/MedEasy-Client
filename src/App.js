@@ -59,7 +59,7 @@ function App() {
         </Route>
       </Route>
       
-      <Route path='/meet/:roomId' element={<Meet/>}/>
+      {/* <Route path='/meet/:roomId' element={<Meet/>}/> */}
       
 
 

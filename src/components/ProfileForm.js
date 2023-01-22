@@ -29,6 +29,9 @@ function ProfileForm() {
   const [timingFrom,setTimingFrom] = useState(null)
   const [timingTo,setTimingTo] = useState(null)
   const [days,setDays] = useState(null)
+  const [city,setCity] = useState(null)
+  const [state,setState] = useState(null)
+  const [country,setCountry] = useState(null)
 
   const _onSelect = (option) => {
     console.log(option.value);
@@ -47,7 +50,7 @@ function ProfileForm() {
     }
     try{
       console.log('password: ', userInfo);
-      await dispatch(completeProfile({...userInfo,name,username,img,imgName,role,speciality:Speciality, experience, degree,phone, timing: {timeFrom:timingFrom,timeTo:timingTo}, address, days: days.split(',')}))
+      await dispatch(completeProfile({...userInfo,name,username,img,imgName,role,speciality:Speciality, experience, degree,phone, timing: {timeFrom:timingFrom,timeTo:timingTo}, address, days: days.split(','),city,state,country}))
       navigate('/home')
   }
     catch(err) {
@@ -155,6 +158,18 @@ const convertTobase64 = (file) => {
             {role==='Doctor' && <div className='flex flex-col input-grp relative animate-form delay-15'>
               <label className='' htmlFor='address'>Address</label>
               <textarea required  onChange={(e)=>setAddress(e.target.value)} placeholder='Enter your Address' className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2' name='address' id='address'/>
+            </div>}
+            {role==='Doctor' && <div className='flex flex-col input-grp relative animate-form delay-15'>
+              <label className='' htmlFor='address'>City</label>
+              <input type={'text'} required  onChange={(e)=>setCity(e.target.value)} placeholder='Enter your city' className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2' name='address' id='address'/>
+            </div>}
+            {role==='Doctor' && <div className='flex flex-col input-grp relative animate-form delay-15'>
+              <label className='' htmlFor='address'>State</label>
+              <input type={'text'} required  onChange={(e)=>setState(e.target.value)} placeholder='Enter your state' className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2' name='address' id='address'/>
+            </div>}
+            {role==='Doctor' && <div className='flex flex-col input-grp relative animate-form delay-15'>
+              <label className='' htmlFor='address'>Country</label>
+              <input type={'text'} required  onChange={(e)=>setCountry(e.target.value)} placeholder='Enter your country' className='focus:outline-0 border-b-2 focus:border-b-green-600 transition-colors p-2' name='address' id='address'/>
             </div>}
             <div className='flex flex-col input-grp relative animate-form delay-15'>
               <label className='' htmlFor='phone'>Contact Number</label>

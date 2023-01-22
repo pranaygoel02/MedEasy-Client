@@ -27,7 +27,7 @@ function Appointment() {
     <div className='font-manrope flex flex-col gap-4 py-4'>
         <div className='flex w-full items-center justify-between'>
         <h1 className='text-2xl font-bold'>Your Appointments For This Week</h1>
-        {userInfo?.role==='Doctor' && <Link title='Your Meet' to={`/meet/${userInfo?.roomId}`}><VideoChatOutlinedIcon/></Link>}
+        {/* {userInfo?.role==='Doctor' && <Link title='Your Meet' to={`/meet/${userInfo?.roomId}`}><VideoChatOutlinedIcon/></Link>} */}
         </div>
         {loading && <p>Hang On! Loading your appointments...</p>}
         {!loading && appointments?.length === 0 && <p>You don't have any appointments for this week.</p>}

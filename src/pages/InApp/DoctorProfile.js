@@ -9,6 +9,7 @@ import EditProfile from '../../components/EditProfile';
 import { getDoctorInfo } from '../../redux/actions/docActions';
 import BookAppointmentClient from '../../components/BookAppointmentClient';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import CallIcon from '@mui/icons-material/Call';
 
 function DoctorProfile() {
   const [show,setShow] = useState(false)
@@ -90,7 +91,11 @@ function DoctorProfile() {
             {doctorInfo?.degree && <h4 className='flex flex-wrap gap-2'>{(doctorInfo?.degree.split(',')).map(deg=><p className='p-2 rounded-2xl text-sm border border-green-600 w-min'>{deg}</p>)}</h4>}
             {doctorInfo?.address && <div className='flex gap-2 text-green-600'>
                 <FmdGoodOutlinedIcon />
-                <p className='text-black'>{doctorInfo?.address}</p>
+                <p className='text-black text-start'>{doctorInfo?.address}<br></br>{doctorInfo?.city}, {doctorInfo?.state}, {doctorInfo?.country}</p>
+              </div>}
+            {doctorInfo?.phone && <div className='flex gap-2 text-green-600'>
+                <CallIcon />
+                <p className='text-black text-start'>{doctorInfo?.phone}</p>
               </div>}
             {doctorInfo?.days && doctorInfo?.timing && <div className='flex flex-col md:flex-row gap-8'>
               {doctorInfo?.days && <div className='md:items-start flex flex-col gap-2'>
