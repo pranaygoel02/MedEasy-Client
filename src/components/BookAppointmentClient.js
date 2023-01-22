@@ -7,7 +7,7 @@ function BookAppointmentClient({docInfo,closeMenu}) {
   const dispatch = useDispatch()
   const [day,setDay] = useState(docInfo?.days[0])
   const {userInfo} = useSelector(state => state.userAuth)
-  const {loading,error} = useSelector(state => state.appointment)
+  const {loading,error,success} = useSelector(state => state.appointment)
     console.log(docInfo);
     const handleAppointment = async () => {
         console.log('booking appointment for ', day);
@@ -33,8 +33,8 @@ function BookAppointmentClient({docInfo,closeMenu}) {
                 {docInfo?.days?.map((day,index)=><option key={index} value={day}>{day}</option>)}
             </select>
             </div>
-          <button onClick={handleAppointment} className='p-2 hover:bg-green-600 border border-green-600 rounded hover:text-white transition-all text-green-600'>Confirm Appointment</button>
-          {error && <p className='text-red-600'>{error}</p>}
+          <button onClick={handleAppointment} className='p-2 hover:bg-green-600 border border-green-600 rounded hover:text-white transition-all text-green-600'>{loading ? 'Booking...' : 'Confirm Appointment'}</button>
+          {(error || success) && <p className={error ? 'text-red-600' : 'text-green-600'}>{error ? error : 'Appointment Confirmed'}</p>}
         </div>     
     </div>
   )

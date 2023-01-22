@@ -4,7 +4,8 @@ export default function bookAppointmentReducer (state = {}, action) {
     switch (action.type) {
         case BOOK_APPOINTMENT_REQUEST:
         return { 
-            loading: true 
+            loading: true,
+            success: false
         };
         case BOOK_APPOINTMENT_SUCCESS:
         return { 
@@ -14,7 +15,8 @@ export default function bookAppointmentReducer (state = {}, action) {
         case BOOK_APPOINTMENT_FAIL:
         return { 
             loading: false,
-            error: action.payload
+            error: action.payload,
+            success: false
         };
         case GET_APPOINTMENTS_REQUEST:
         return {
