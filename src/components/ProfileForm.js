@@ -50,7 +50,7 @@ function ProfileForm() {
     }
     try{
       console.log('password: ', userInfo);
-      await dispatch(completeProfile({...userInfo,name,username,img,imgName,role,speciality:Speciality, experience, degree,phone, timing: {timeFrom:timingFrom,timeTo:timingTo}, address, days: days.split(','),city,state,country}))
+      await dispatch(completeProfile({...userInfo,name,username,img,imgName,role,speciality:Speciality, experience, degree,phone, timing: {timeFrom:timingFrom,timeTo:timingTo}, address, days: (days && days.includes(',')) ? days.split(',') : '',city,state,country}))
       navigate('/home')
   }
     catch(err) {
