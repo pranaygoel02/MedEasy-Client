@@ -27,7 +27,7 @@ function Landing() {
             <div className='flex flex-col gap-2 items-start justify-center text-left' style={{flexBasis:'50%'}}>
                 <p className='text-green-600 tracking-[1px] font-semibold '>MEDEASY</p>
                 <h1 className='text-3xl md:text-5xl font-extrabold md:leading-normal'>Healthcare Solutions for a Better Life</h1>
-                <p className=' text-xs md:text-sm md:max-w-[90%] py-4 text-gray-800 text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <p className=' text-xs md:text-sm md:max-w-[90%] py-4 text-gray-800 text-justify'>The word healthcare means different things to different people. Some folks might think of their insurance provider and access to medical services, others may think of their personal self-care; the health of their mental, spiritual, and physical well-being.</p>
                 {!userInfo?.username && <div className='overflow-hidden flex flex-row items-center rounded-md w-full md:w-[70%] shadow-md' >
                     <input onChange={(e)=>setEmail(e.target.value)} className='w-[80%] p-4 focus:outline-none font-manrope' type='email' placeholder='Enter your email' value={email}/>
                     <Link to={'/user-authentication/signup'} className='bg-green-600 p-4 text-white text-center w-[40%]'>Get Started</Link>
@@ -48,10 +48,10 @@ function Landing() {
                 <h2 className='text-5xl font-medium md:leading-snug'>Healthcare the way you want it. Simple, convinient and reliable.</h2>
             </div>
             <div style={{flexBasis:'50%'}}>
-                <div className='flex flex-col'>
+                <div className='flex flex-col gap-8'>
                     <p className='text-sm text-gray-300'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
                     <div className='flex w-full items-center justify-between'>
-
+                        <p className='italic text-2xl'>“Helping those in need is not charity, it’s humanity.” <br></br>– Abhijit Naskar</p>
                     </div>
                 </div>
             </div>
