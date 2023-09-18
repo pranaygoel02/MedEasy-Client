@@ -21,6 +21,7 @@ function NavMenu() {
 <>
     <div className={`w-full flex flex-col md:flex-row items-center justify-center font-manrope md:justify-end gap-4 overflow-hidden text-gray-400 ${!navOpen ? 'box-height-0' :'box-height-full'}`}>
         {pathname !== '/' && pathname !== '/home' && pathname.includes('blog') && <button onClick={() => toggleSearchBar()} title='Search' className='text-gray-400'><SearchIcon/></button>}
+        <NavLink title='Find Hospitals Near You' onClick={()=>toggleNav()} to={'/map'}>Find Hospital</NavLink>
         <NavLink title='Explore Doctors' onClick={()=>toggleNav()} to={'/doctor'}>Doctors</NavLink>
         <NavLink title='Blog' onClick={()=>toggleNav()} to={'/blog'}>Blog</NavLink>
         {!userInfo?.username && <NavLink title='Login' onClick={()=>toggleNav()} to={'/user-authentication/login'}>Login</NavLink>}

@@ -67,3 +67,63 @@ div::-webkit-scrollbar-track{
 input[type=time]::selection {
     background-color: green; 
 }
+
+.mapboxgl-popup {
+    filter: drop-shadow(10px 50px 8px rgba(0, 0, 0, 0.15)) !important;
+}
+
+.mapboxgl-popup-tip {
+    border-top-color:  rgb(22,163,74) !important;
+}
+
+.mapboxgl-popup-content {
+    padding: 0 !important;
+    padding-right: 1rem !important;
+    background-color:  rgb(22,163,74) !important;
+}
+
+.mapboxgl-popup-close-button {
+    background-color: #000000 !important;
+    color: white !important;
+    padding-inline: 0.25rem !important;
+    aspect-ratio: 1/1 !important;
+    border-bottom-left-radius: 0.25rem !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.mapboxgl-user-location-dot, .mapboxgl-user-location-dot::after, .mapboxgl-user-location-dot::before {
+    display: none !important;
+}
+
+.mapboxgl-user-location-accuracy-circle {
+    display: none !important;
+}
+
+#user-loc-marker {
+    position: relative;
+}
+
+#user-loc-marker::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    background-color: red;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.badge {
+    @apply bg-slate-900 text-white p-2 rounded-md font-bold text-2xl;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input:focus {
+    outline: none;
+}

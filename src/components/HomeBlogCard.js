@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link,useNavigate,useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setBlogContent } from '../redux/actions/AddBlogActions'
@@ -25,4 +25,4 @@ function BlogCard({blog}) {
   )
 }
 
-export default BlogCard
+export default memo(BlogCard)
