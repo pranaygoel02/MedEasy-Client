@@ -417,7 +417,7 @@ function HospitalMap({
                   Lat: {selectedHospital?.geometry?.coordinates[0]}, Lon:{" "}
                   {selectedHospital?.geometry?.coordinates[1]}
                 </p>
-                <div className="flex flex-wrap w-full items-center gap-2 py-4 lg:py-2">
+                <div className="flex flex-wrap w-full items-center lg:min-w-[500px] gap-2 py-4 lg:py-2">
                   {selectedHospital?.properties?.datasource?.raw["website"] && (
                     <a
                       className="badge"
