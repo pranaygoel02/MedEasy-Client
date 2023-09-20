@@ -24,7 +24,12 @@ import {
   MdPhone,
 } from "react-icons/md";
 import { FaWalking, FaHospitalAlt, FaPhone } from "react-icons/fa";
-import { IoBicycle, IoGlobe, IoGlobeOutline } from "react-icons/io5";
+import {
+  IoBicycle,
+  IoGlobe,
+  IoGlobeOutline,
+  IoInformation,
+} from "react-icons/io5";
 import { AiOutlineEnter } from "react-icons/ai";
 
 const VR = () => (
@@ -271,7 +276,7 @@ function HospitalMap({
     });
   };
 
-  const [popupInfo, setPopupInfo] = useState(null);
+  const [popupInfo, setPopupInfo] = useState(false);
   const [selectedHospital, setSelectedHospital] = useState(null);
   const [hospitalRoute, setHospitalRoute] = useState(null);
   const [hospitalRoutes, setHospitalRoutes] = useState(null);
@@ -299,9 +304,11 @@ function HospitalMap({
     },
   ];
 
-  const [medium, setMedium] = useState(mediums[0]);
+  const HospitalsPin = () => (
+    <FaHospitalAlt className="bg-red-600 text-white text-lg p-1 rounded-sm" />
+  )
 
-  console.log(popupInfo, "in map");
+  const [medium, setMedium] = useState(mediums[0]);
 
   const pins = useMemo(
     () =>
@@ -315,12 +322,11 @@ function HospitalMap({
             anchor="bottom"
             onClick={(e) => {
               e.originalEvent.stopPropagation();
-              setPopupInfo(hospital);
               setSelectedHospital(hospital);
               bringMapToCenter(hospital.geometry.coordinates);
             }}
           >
-            <FaHospitalAlt className="bg-red-600 text-white text-lg p-1 rounded-sm" />
+            <HospitalsPin />
           </Marker>
         );
       }),
@@ -404,105 +410,136 @@ function HospitalMap({
                 );
               })}
           </div>
-          {selectedHospital && hospitalRoute && (
-            <div className="bg-green-600 lg:rounded-lg w-full lg:max-w-[500px] h-fit shadow-md text-[0.85rem] font-manrope overflow-hidden order-3 lg:order-2">
-              <div className="p-4 rounded-b-lg drop-shadow-xl bg-white flex flex-col gap-1 ">
-                <h1 className="text-xl font-bold text-slate-900">
-                  {selectedHospital?.properties?.name}
-                </h1>
-                <p className="">
-                  {selectedHospital?.properties?.address_line2}
-                </p>
-                <p className="text-neutral-500">
-                  Lat: {selectedHospital?.geometry?.coordinates[0]}, Lon:{" "}
-                  {selectedHospital?.geometry?.coordinates[1]}
-                </p>
-                <div className="flex flex-wrap w-full items-center lg:min-w-[500px] gap-2 py-4 lg:py-2">
-                  {selectedHospital?.properties?.datasource?.raw["website"] && (
-                    <a
-                      className="badge"
-                      href={
-                        selectedHospital?.properties?.datasource?.raw["website"]
-                      }
-                      target="_blank"
-                    >
-                      <IoGlobeOutline />{" "}
-                    </a>
-                  )}
-                  {selectedHospital?.properties?.datasource?.raw[
-                    "contact:phone"
-                  ] && (
-                    <a
-                      className="badge"
-                      href={
-                        "tel:" +
-                        selectedHospital?.properties?.datasource?.raw[
-                          "contact:phone"
-                        ]
-                      }
-                      target="_blank"
-                    >
-                      <MdPhone />{" "}
-                    </a>
-                  )}
-                  {selectedHospital?.properties?.datasource?.raw["email"] && (
-                    <a
-                      className="badge"
-                      href={
-                        "mailto:" +
-                        selectedHospital?.properties?.datasource?.raw["email"]
-                      }
-                      target="_blank"
-                    >
-                      <MdMail />{" "}
-                    </a>
-                  )}
-                </div>
-              </div>
-              <div className="p-4 inline-flex gap-4 bg-green-600 text-white w-full justify-between">
-                <div className="text-4xl self-center">{medium.icon}</div>
-                <VR />
-                <div>
-                  Distance
-                  <p className="text-3xl font-bold">
-                    {metersToKm(hospitalRoutes[0]?.distance)}
-                  </p>
-                </div>
-                <VR />
-                <div>
-                  Duration
-                  <p className="text-3xl font-bold">
-                    {secondsToHms(hospitalRoutes[0]?.duration)}
-                  </p>
-                </div>
-              </div>
+          <div className="space-y-2 w-full">
+            <div className="w-full px-4 lg:px-0">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setRadius(parseInt(e.target[0].value) / 100);
+                }}
+                className="pr-2 order-2 lg:order-3 py-2 space-x-2 bg-white rounded-md text-lg shadow-md inline-flex justify-between items-end w-full"
+              >
+                <input
+                  className="pl-2 self-center lg:flex-1 w-min"
+                  type="number"
+                  name="range"
+                  placeholder="Enter range in kms"
+                />
+                <label
+                  htmlFor="range"
+                  className="text-neutral-400 text-sm ml-0"
+                >
+                  kms
+                </label>
+                <button
+                  type="submit"
+                  className="bg-slate-900 text-white py-2 px-4 rounded-md"
+                >
+                  <AiOutlineEnter />
+                </button>
+              </form>
             </div>
-          )}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setRadius(parseInt(e.target[0].value) / 100);
-            }}
-            className="pr-2 order-2 lg:order-3 py-2 space-x-2 bg-white rounded-md text-lg shadow-md inline-flex justify-between items-end w-full max-w-[94%] mx-auto"
-          >
-            <input
-              className="px-2 self-center flex-1"
-              type="number"
-              name="range"
-              placeholder="Enter range in kms"
-            />
-            <label htmlFor="range" className="text-neutral-400 text-sm">
-              kms
-            </label>
-            <button
-              type="submit"
-              className="bg-slate-900 text-white py-2 px-4 rounded-md"
-            >
-              <AiOutlineEnter />
-            </button>
-          </form>
-          
+            {selectedHospital && hospitalRoute && (
+              <div className="bg-green-600 lg:rounded-lg w-full lg:max-w-[500px] h-fit shadow-md text-[0.85rem] font-manrope overflow-hidden order-3 lg:order-2">
+                <div className="p-4 rounded-b-lg drop-shadow-xl bg-white flex flex-col gap-1 ">
+                  <h1 className="text-xl font-bold text-slate-900">
+                    {selectedHospital?.properties?.name}
+                  </h1>
+                  <p className="">
+                    {selectedHospital?.properties?.address_line2}
+                  </p>
+                  <p className="text-neutral-500">
+                    Lat: {selectedHospital?.geometry?.coordinates[0]}, Lon:{" "}
+                    {selectedHospital?.geometry?.coordinates[1]}
+                  </p>
+                  <div className="flex flex-wrap w-full items-center lg:min-w-[500px] gap-2 py-4 lg:py-2">
+                    {selectedHospital?.properties?.datasource?.raw[
+                      "website"
+                    ] && (
+                      <a
+                        className="badge"
+                        href={
+                          selectedHospital?.properties?.datasource?.raw[
+                            "website"
+                          ]
+                        }
+                        target="_blank"
+                      >
+                        <IoGlobeOutline />{" "}
+                      </a>
+                    )}
+                    {selectedHospital?.properties?.datasource?.raw[
+                      "contact:phone"
+                    ] && (
+                      <a
+                        className="badge"
+                        href={
+                          "tel:" +
+                          selectedHospital?.properties?.datasource?.raw[
+                            "contact:phone"
+                          ]
+                        }
+                        target="_blank"
+                      >
+                        <MdPhone />{" "}
+                      </a>
+                    )}
+                    {selectedHospital?.properties?.datasource?.raw["email"] && (
+                      <a
+                        className="badge"
+                        href={
+                          "mailto:" +
+                          selectedHospital?.properties?.datasource?.raw["email"]
+                        }
+                        target="_blank"
+                      >
+                        <MdMail />{" "}
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <div className="p-4 inline-flex gap-4 bg-green-600 text-white w-full justify-between">
+                  <div className="text-4xl self-center">{medium.icon}</div>
+                  <VR />
+                  <div>
+                    Distance
+                    <p className="text-3xl font-bold">
+                      {metersToKm(hospitalRoutes[0]?.distance)}
+                    </p>
+                  </div>
+                  <VR />
+                  <div>
+                    Duration
+                    <p className="text-3xl font-bold">
+                      {secondsToHms(hospitalRoutes[0]?.duration)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </section>
+        {/* <section className="absolute bottom-0 right-0 m-8 mr-3">
+          {popupInfo && 
+          <div className="">
+              <h2>Map Info</h2>
+              <label>Legend</label>
+              <ul className="flex flex-col">
+                <li className="inline-flex gap-2"><UserPin className="w-20"/> Your location</li>
+                <li className="inline-flex gap-2"><HospitalPin/> Selected Hospital Location</li>
+                <li className="inline-flex gap-2"><HospitalsPin/> Hospital</li>
+              </ul>
+            </div>
+            }
+          <button
+            onClick={() => setPopupInfo(!popupInfo)}
+            title={"Info"}
+            key={`info`}
+            className={`p-2 rounded-md w-fit text-2xl shadow-md text-black bg-white`}
+          >
+            <IoInformation />
+          </button>
+        </section> */}
         <Marker
           key={`viewport-location`}
           longitude={parseFloat(viewPort.longitude)}
@@ -576,18 +613,6 @@ function HospitalMap({
           ))}
 
         {pins}
-        {/* {popupInfo && (
-          <Popup
-            anchor="bottom"
-            longitude={parseFloat(popupInfo?.geometry.coordinates[0])}
-            latitude={parseFloat(popupInfo?.geometry.coordinates[1])}
-            onClose={() => setPopupInfo(null)}
-          >
-            <div className="bg-green-600 text-white p-2">
-              {popupInfo?.properties?.name}
-            </div>
-          </Popup>
-        )} */}
       </Map>
     </div>
   );

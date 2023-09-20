@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --update-aminate-timing: 2s;
+}
+
 *{
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -126,4 +130,67 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input:focus {
     outline: none;
+}
+
+
+#update-btn {
+    width: 50px;
+    height: 50px;
+    animation: animate-btn var(--update-aminate-timing) forwards;
+    transition: all 300ms ease-in-out;
+}
+
+@keyframes animate-btn {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(50%);
+    }
+    30% {
+        transform: scale(120%) translateY(0%);
+    }
+    50% {
+        width: 50px;
+        transform: scale(100%) translateY(0%);
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+#update-arrow {
+    animation: animate-arrow var(--update-aminate-timing) forwards;
+    transform: translateX(50%) translateY(-50%) rotate(0deg);
+    transition: all 300ms ease-in-out;
+}
+
+@keyframes animate-arrow {
+    0% {
+        right: 50%;
+    }
+    50% {
+        right: 50%;
+        transform: translateX(50%) translateY(-50%) rotate(0deg);
+    }
+    100% {
+        right: 10%;
+        transform: translateX(50%) translateY(-50%) rotate(360deg);
+    }
+}
+
+#update-text {
+    opacity: 0;
+    animation: animate-text var(--update-aminate-timing) forwards;
+    transition: all 300ms ease-in-out;
+}
+
+@keyframes animate-text {
+    0% {
+        opacity: 0;
+    }
+    82% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

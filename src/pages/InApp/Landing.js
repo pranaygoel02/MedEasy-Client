@@ -7,8 +7,8 @@ import { useNav } from "../../context/NavContext";
 import { getAllBlogsFromDb } from "../../redux/actions/GetAllBlogs";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import CallIcon from "@mui/icons-material/Call";
-import {FaMapMarkedAlt} from 'react-icons/fa'
-import {FiArrowUpRight} from 'react-icons/fi'
+import { FaMapMarkedAlt } from "react-icons/fa";
+import { FiArrowUpRight } from "react-icons/fi";
 
 function Landing() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function Landing() {
           className="flex flex-col gap-4 items-center md:items-start justify-center text-center md:text-left"
           style={{ flexBasis: "50%" }}
         >
-          <h1 className="text-3xl md:text-5xl font-extrabold md:leading-normal">
+          <h1 className="text-3xl md:text-5xl font-extrabold md:leading-snug md:max-w-[80%]">
             Healthcare Solutions for a Better Life
           </h1>
           <p className=" text-xs md:text-sm md:max-w-[90%] py-4 text-gray-800">
@@ -38,9 +38,17 @@ function Landing() {
             services, others may think of their personal self-care; the health
             of their mental, spiritual, and physical well-being.
           </p>
-          <p className="w-fit max-w-[85%] leading-loose rounded-full mb-4 bg-gradient-to-br from-green-500 to-green-600 p-2 pl-4 text-white inline-flex items-center gap-2"><FaMapMarkedAlt className="text-xl "/> Introducing Maps <Link to={'/map'} className="bg-white p-2 text-green-600 rounded-full"><FiArrowUpRight/></Link></p>
-        <p>🎉Now find the nearest hospitals and blood banks in your area!</p>
-          {!userInfo?.username && (
+          <div className="w-[230px] inline-flex items-center justify-center mb-4">
+            <Link to={"/map"} id="update-btn" className="relative inline-flex justify-start items-center rounded-full bg-gradient-to-br from-green-500 to-green-600 p-2 pl-4 text-white gap-2">
+              <div id="update-text" className="inline-flex gap-2">
+                <FaMapMarkedAlt className="text-2xl " />
+                <span className="flex-1 w-fit">Introducing Maps</span>
+              </div>
+              <FiArrowUpRight id="update-arrow" className="bg-white absolute top-[50%] translate-y-[-50%] text-3xl p-1 shadow-lg text-green-600 rounded-full w-[32px] " />
+            </Link>
+          </div>
+          <p>🎉Now find the nearest hospitals and blood banks in your area!</p>
+          {/* {!userInfo && (
             <div className="overflow-hidden flex flex-row items-center rounded-md w-full md:w-[70%] shadow-md">
               <input
                 onChange={(e) => setEmail(e.target.value)}
@@ -56,7 +64,7 @@ function Landing() {
                 Get Started
               </Link>
             </div>
-          )}
+          )} */}
         </div>
         <div style={{ flexBasis: "50%" }}>
           <div className=" w-full relative">
